@@ -1,36 +1,36 @@
-ClearAll["Global`*"]
-var = .;
 (*in mm unit*)
+ClearAll["Global`*"]
+(*↓ how many matricies are you going to write?*)
+num = 2;
+(*↓plot range*)
+downlimit = 0;
+rge = 350;
+(*↓variable name*)
+var = .;
+(*↓const defining*)
 lambda = 1.064*10^-3;
 n = 1.82;
-(*element*)
+(*↓element*)
 f[x_] := {{1, 0}, {-1/x, 1}}
 l[x_] :={{1, x}, {0, 1}}
-(*parameter*)
+fth[x_, P_] := {{1, 0}, {-1/(x/P), 1}}
+(*↓parameter*)
 s[a_, d_] := a + d
 w[a_, b_, d_] := Sqrt[2*lambda*Abs[b]/(Pi*Sqrt[4 - (a + d)^2])]
 w0[a_, c_, d_] := Sqrt[Abs[(lambda/(2*Pi*c))*Sqrt[4 - (a + d)^2]]]
-L[a_, c_, d_] := (a - d)/(2*c)
+L[a_, c_, d_] := (a - d)/(2 * c)
+
+(*cavity parameters*)
+(*this is an example*)
+l1 =  50;
+l2 = 110;
+(*abcd*)
+{{a[1], b[1]}, {c[1], d[1]}} = l[l1].fth[11000, var].l[l2];
 
 
-(*write the abcd matrix here*)
-{{a1,b1},{c1,d1}} =l[50].f[30];
+(*plotting*)
+s = Table[Plot[{s[a[i],d[i]]}, {var, downlimit, rge},  PlotRange -> {{downlimit, rge}, {-2, 2}}, PlotLabel -> "a+d"],{i,1,num}]
+w = Table[Plot[{w[a[i],b[i],d[i]], 0.08}, {var, downlimit, rge},  PlotRange -> {{downlimit, rge}, {0, 0.5}}, PlotLabel -> "radius"],{i,1,num}]
+w0 = Table[Plot[{w0[a[i],c[i],d[i]], 0.08}, {var, downlimit, rge},  PlotRange -> {{downlimit, rge}, {0, 0.5}}, PlotLabel -> "waist"],{i,1,num}]
+L = Table[Plot[{L[a[i],c[i],d[i]]}, {var, downlimit, rge},  PlotRange -> {{downlimit, rge}, Automatic}, PlotLabel -> "waist location"],{i,1,num}]
 
-
-
-(*calculate*)
-s1 = s[a1, d1]; s2 = s[a2, d2]; s3 = s[a3, d3]; s4 = s[a4, d4];
-w1 = w[a1, b1, d1]; w2 = w[a2, b2, d2]; w3 = w[a3, b3, d3]; w4 = w[a4, b4, d4];
-w10 = w0[a1, c1, d1]; w20 = w0[a2, c2, d2]; w30 = w0[a3, c3, d3]; w40 = w0[a4, c4, d4];
-L10 = L[a1, c1, d1]; L20 = L[a2, c2, d2]; L30 = L[a3, c3, d3]; L40 = L[a4, c4, d4];
-(*plot*)
-downlimit = 0;
-rge = 350;
-Plot[{s1, s2, s3, s4}, {var, downlimit, rge}, 
- PlotRange -> {{downlimit, rge}, {-2, 2}}, PlotLabel -> "a+d"]
-Plot[{w1, w2, w3, w4, 0.08}, {var, downlimit, rge}, 
- PlotRange -> {{downlimit, rge}, {0, 0.5}}, PlotLabel -> "radius"]
-Plot[{w10, w20, w30, w40, 0.08}, {var, downlimit, rge}, 
- PlotRange -> {{downlimit, rge}, {0, 0.5}}, PlotLabel -> "waist"]
-Plot[{L10, L20, L30, L40}, {var, downlimit, rge}, 
- PlotRange -> {{downlimit, rge}, Automatic}, PlotLabel -> "waist位置"]
