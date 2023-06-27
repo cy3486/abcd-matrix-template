@@ -29,8 +29,15 @@ l2 = 110;
 
 
 (*plotting*)
-s = Table[Plot[{s[a[i],d[i]]}, {var, downlimit, rge},  PlotRange -> {{downlimit, rge}, {-2, 2}}, PlotLabel -> "a+d"],{i,1,num}]
-w = Table[Plot[{w[a[i],b[i],d[i]], 0.08}, {var, downlimit, rge},  PlotRange -> {{downlimit, rge}, {0, 0.5}}, PlotLabel -> "radius"],{i,1,num}]
-w0 = Table[Plot[{w0[a[i],c[i],d[i]], 0.08}, {var, downlimit, rge},  PlotRange -> {{downlimit, rge}, {0, 0.5}}, PlotLabel -> "waist"],{i,1,num}]
-L = Table[Plot[{L[a[i],c[i],d[i]]}, {var, downlimit, rge},  PlotRange -> {{downlimit, rge}, Automatic}, PlotLabel -> "waist location"],{i,1,num}]
-
+Table[GraphicsGrid[
+  {{Plot[{s[a[i], d[i]]}, {var, downlimit, uplimit}, 
+     PlotRange -> {{downlimit, uplimit}, {-2, 2}}, PlotLabel -> "a+d"],
+    Plot[{w[a[i], b[i], d[i]], 0.23}, {var, downlimit, uplimit}, 
+     PlotRange -> {{downlimit, uplimit}, {0, 0.4}}, 
+     PlotLabel -> "radius"]},
+   {Plot[{w0[a[i], c[i], d[i]], 0.23}, {var, downlimit, uplimit}, 
+     PlotRange -> {{downlimit, uplimit}, {0, 0.4}}, 
+     PlotLabel -> "waist"],
+    Plot[{L[a[i], c[i], d[i]]}, {var, downlimit, uplimit}, 
+     PlotRange -> {{downlimit, uplimit}, Automatic}, 
+     PlotLabel -> "waist location"]}}], {i, 1, num}]
