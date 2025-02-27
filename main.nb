@@ -1,20 +1,20 @@
 (*in mm unit*)
 ClearAll["Global`*"]
-(*↓ how many matricies are you going to write?*)
+(*\[DownArrow] how many matricies are you going to write?*)
 num = 2;
-(*↓plot range*)
+(*\[DownArrow]plot range*)
 downlimit = 0;
 rge = 350;
-(*↓variable name*)
+(*\[DownArrow]variable name*)
 var = .;
-(*↓const defining*)
+(*\[DownArrow]const defining*)
 lambda = 1.064*10^-3;
 n = 1.82;
-(*↓element*)
+(*\[DownArrow]element*)
 f[x_] := {{1, 0}, {-1/x, 1}}
 l[x_] :={{1, x}, {0, 1}}
 fth[x_, P_] := {{1, 0}, {-1/(x/P), 1}}
-(*↓parameter*)
+(*\[DownArrow]parameter*)
 s[a_, d_] := a + d
 w[a_, b_, d_] := Sqrt[2*lambda*Abs[b]/(Pi*Sqrt[4 - (a + d)^2])]
 w0[a_, c_, d_] := Sqrt[Abs[(lambda/(2*Pi*c))*Sqrt[4 - (a + d)^2]]]
